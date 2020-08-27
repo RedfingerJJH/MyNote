@@ -1,0 +1,128 @@
+195、如何定义快捷键
+HOME：C:\Cadence\SPB_Data\pcbenv
+新建C:\Cadence\SPB_Data\pcbenv\script，并放入script文件
+软件设置：Setup -> User Preferences -> paths -> config -> scriptpath
+录制script：File -> Script
+（怎么知道命令，先点击菜单或工具条上相应命令，再看状态栏显示）
+alias F4 move
+alias sa shape add
+funckey mv move
+funckey ss shape select
+alias gd1 "replay grid1.scr"
+alias gd5 "replay grid5.scr"
+
+196、如何在PCB中彻底删除或直接添加器件（不建议）
+Logic -> Part Logic
+在PCB中选中器件，可以Delete，把Refdes改为不存在的，可以add。
+可以通过封装添加PCB没有的器件
+
+197、如何修改PCB网络连接
+Setup -> User Preferences
+Logic + logic_edit_enabled
+Logic -> Net Logic
+选中网络，可以删除，也可以指定
+Assign指定，Deassign取消
+
+198、如何加密与解密PCB
+File -> Properties
+
+199、如何删除多余Subclass
+Setup -> Subclass
+
+200、如何还原或去除快捷图标
+View -> Customize Toolbar
+
+201、如何打开和关闭面板
+View -> Windows
+也可以在面板标题栏上点右键
+
+202、如何快速打开与关闭常用层面
+输入命令：set查找viewpath路径
+新建C:\Cadence\SPB_Data\pcbenv\view
+软件设置：Setup -> User Preferences -> paths -> config -> viewpath
+View -> Color View Save
+
+203、如何快速输入文字
+Add -> Text
+在光标上点右键，Read From File
+
+204、如何比较设计文件
+先分别Tools -> Design Compare生成xml文件
+在其中一个接着打开另一个生成的xml文件
+
+205、如何分区设计
+先勾选PCB Team Design
+Place -> Design Partition -> Create Partitions 右键加区域
+Place -> Design Partition -> Guideports create
+Place -> Design Partition -> Workflow Manager
+
+206、如何快速更新封装
+Place -> update Symbols
+在Package symbols中选中要更新的封装，在下面勾选更新的项目，然后更新
+
+207、如何快速恢复器件丝印编号
+Setup -> Application Mode -> Placement Edit
+在器件上右键，选择Refresh symbol instance
+
+208、如何复用Gerber层及其设置
+导出：Manufacture -> Artwork，单击Select all，在任意选中的Film上右键，单击Save All Checked
+导入：Manufacture -> Artwork，单击Add
+
+209、如何复用设计参数
+导出：File -> Export -> Parameters,
+导入：File -> Import -> Parameters,
+
+210、如何快速修改器件焊盘外形
+Tools -> Pad ->Boundary
+点选焊盘，再停到焊盘边缘点选起点
+
+211、如何直接修改板上焊盘尺寸
+Tools -> Padstack -> Modify Design Padstack
+可以在列表中选择，也可以直接在板上点击选择，然后点击Edit
+修改完后，File -> Update to Design
+
+212、如何去除后台多余焊盘
+Tools -> Padstack -> Modify Design Padstack
+单击Purge -> All
+
+213、如何隐藏DRC标记
+Display -> Waive DRCs -> Waive
+点击DRC标记，然后在旁边点一下
+
+214、如何查询走线寄生参数
+先设置好层叠
+Display -> Parasitic
+
+215、如何设置手形命令
+Tools -> Utilities -> Stroke Editor
+多绘制几个，重启才生效
+
+216、如何快速查找焊盘所在器件
+Tools -> Padstack Finder
+可多选，可高亮，可清除高亮
+
+217、如何修改鼠标放到对象上时的提示信息
+Setup -> Datatip Customization
+
+218、如何缩放图形
+Manufacturer -> Drafting -> Create Detail
+设置好Find与Options（Scaling factor）
+
+219、如何快速使走线连到焊盘中心
+Tools -> Derive Connectivity
+勾选4项中的前2项
+Convert lines to connect lines
+Keep connect lines if no connection
+
+220、如何使同一个PCB分窗口显示（Enterprise）
+View -> Split View -> Float或Horizontal或Vertical
+
+221、如何设置3D模型
+先设置3D库路径：Setup -> User Prefrences, Paths -> Library -> steppath
+设置模型：Setup -> Step Package mapping
+
+222、如何导出3D文件
+File -> Export -> STEP
+File -> Export -> IDF(PTC)
+
+223、如何实时联网设计

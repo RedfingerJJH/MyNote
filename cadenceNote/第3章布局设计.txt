@@ -1,0 +1,93 @@
+34、如何移动、旋转、镜像器件
+Edit -> MOve
+Find: Symbols
+Options: User Pick(一般整体旋转，先选择器件，然后点选位置) 
+旋转时绕圈要大一点
+Move命令一次只能Mirror一个器件
+
+35、如何镜像多个器件
+Edit -> Mirror
+Find: Symbols，选中器件，点击提取，点击放置。
+途中可以使用Temp Group与Snap pick to
+
+36、如何快速对齐多个器件
+Setup -> Application Mode -> Placement Edit
+选择多个器件，在某个参考器件上右键Align components，设置好参数，右键Done
+
+37、如何复制与交换器件
+Edit -> Copy，Find面板选择Symbols，Options面板设置参数
+Place -> Swap -> Components
+
+38、如何用极坐标实现器件圆形摆放
+Edit -> Copy
+Find面板Symbols，Options面板Copy mode：Polar
+以选中器件与点击点之间距离为半径，逆时针摆放，最后Swapper完成。
+
+39、如何快速选择多个器件
+框选方式
+点选方式，右键Temp Group，选择器件，然后Complete
+也可使用Select by polygon/Lasso/Path
+
+40、如何定义与运用Group
+Edit -> Groups
+在Options面板输入Group名称创建Group，选择，右键Done或Next
+运用Group，须在Find面板选中Group
+打散：Find：Groups，选中Group，右键Disband group
+
+41、如何放置固定结构件
+精确定位：先找到定位的Pin Number，Edit -> Move，Find面板Symbols，Options面板，
+Point选择sym pin #，输入Pin Number，移动器件到固定位置附近，右键Snap pick to，
+依具体形状选择选项。
+另一方式：Options面板Point选择User Pick，点击选中器件，在对焦位置附近，
+右键Snap pick to，移动器件到固定位置附近，右键Snap pick to。
+如果定位是方形的，先Snap pick to选择segment midpoint，然后平移。
+
+42、如何锁定和解锁器件
+Display -> Color/Visibility， Display页面设置锁定模式
+Fix，Find：Symbols，点击锁定器件，右键Done。
+Unfix，Find：Symbols，点击解锁器件，可以右键解锁所有器件，右键Done。
+
+43、如何导出PCB封装
+File -> Export -> Libraries
+勾选全部选项，包括No library dependencies，选择路径。
+
+44、如何更新PCB封装
+首先把新封装放入库路径
+Place -> Update Symbols，仔细选择各个选项。
+
+45、如何高亮和取消高亮器件
+Display -> Assign Color
+Find: Symbol, Options: 选择颜色与模式，点击器件或查找器件，右键Done
+Display -> Dehighlight，点击器件取消单个器件，也可以在Options中取消全部器件，
+不勾选Retain objects custom color才会去除器件颜色。
+
+46、如何复用模块的布局布线
+进入Placement Edit模式
+Find：Symbols，框选器件，按住Ctrl增加或去除器件，在选中的某个器件上右键，
+选择Place replicate create，Find面板发生了变化，可以增选线、过孔等，
+然后右键Done，选择参考点，输入文件名保存
+框选要复用布局布线的器件，在选中的某个器件上右键，
+Place replicate apply，选择刚才创建的复用文件或浏览复用文件，
+如果有不匹配的，可能值定义不一样，去除勾选Device Name与Value，手工指定匹配（先选择左边器件），
+复用后最好打散Group，否则走线有小方块。
+
+47、如何查找指定器件
+在User Prefrences中搜素zoom（UI + Zoom），取消选择no_zoom_to_object
+进入Placement Edit模式，放大显示
+Find面板，Find by name选择Symbol (or Pin)，输入器件名称，然后回车
+
+48、如何查询器件属性
+Display -> Element
+Find：Comps（有器件位号，是从原理图带过来的） 
+或 Symbols（没有器件位号，手工添加的，所有器件都可通过它查询）
+
+49、如何导入导出器件坐标
+File -> Export -> Placement: Placement origin: symbol origin
+File -> Import -> Placement: 要灵活运用Placement options
+
+50、如何测量焊盘间距
+Display -> Measure
+Find: Pins
+没点中对象空方框，点中方框带斜十字
+显示2种单位：Setup -> User Prefrences, 
+Display + Element: showmeasure_altunits, 或者搜素unit。

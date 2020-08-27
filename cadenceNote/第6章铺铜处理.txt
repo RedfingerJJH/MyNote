@@ -1,0 +1,74 @@
+123、如何设置动态铜箔参数
+全局：Shape -> Global Dynamic Params...
+单独：选中shape，右键Parameters...
+
+124、如何设置静态铜箔参数
+全局：Setup -> Design Parameters...,Shapes页面，单击Edit static shape parameters...
+单独：选中shape，右键Parameters...,只有Shape fill针对单个，其他仍是全局
+
+125、如何铺铜箔
+可以铺的过程中右键指定网络
+
+126、如何挖铜箔
+Shape -> Manual Void/Cavity
+element通常用于静态铜箔，
+Shape -> Manual Void/Cavity -> Element，Find面板勾选Shapes与Voids/Cavities，点选静态铜箔，
+Find面板发生变化，勾选要避让的对象，选择要避让的对象
+
+127、如何编辑铜箔的避让（手工挖出的）
+Shape -> Manual Void/Cavity -> Delete/Move/Copy（注意高亮） 
+Delete时，先要选择铜箔，再选择要删除的避让
+
+128、如何修改铜箔外形
+方法1：Shape -> Edit Boundary
+方法2：选中shape，拖动边线
+方法3：补铜箔，再合并，合并后铜箔的参数以合并时先选中的铜箔为准
+
+129、如何修改铜箔网络名
+选中shape，右键Assign Net
+
+130、静、动态铜箔如何互转
+方法1：选中shape，右键Change Shape Type
+方法2：Shape -> Change Shape Type，Options面板设置转换类型
+
+131、如何快速修改铜箔优先级
+选中shape，右键Raise/Lower Priority
+
+132、如何修改多块铜箔的优先级
+Shape -> Shape Utilities -> Advance Priority Control...
+先点击选择要修改的铜箔，然后根据Options参数点击修改单个铜箔优先级
+
+133、如何通过布尔运算合并铜箔
+Shape -> Shape Operations -> OR/AND/ANDNOT/XOR
+OR与AND需要同层
+
+134、如何根据焊盘、走线生成铜箔
+Shape -> Create Bounding Shape
+
+135、如何删除死铜
+Shape -> Delete Islands
+
+136、如何改变铜箔层面
+Edit -> Change，Find面板勾选Shapes，Options面板选取要改到的层面
+
+137、如何复制铜箔到其他层面
+Edit -> Z-Copy，Find面板勾选Shapes，Options面板设定其他参数
+
+138、如何使铜箔内缩或外扩
+方法1：Z-Copy的时候内缩或外扩
+方法2：Setup -> Application Mode -> Shape Edit，
+Find面板勾选Shapes，单击要内缩或外扩的铜箔，右键Expand/Contract，Options面板设置内缩或外扩值
+
+139、如何使部分管脚与铜箔全连接
+Edit -> Properties，Find面板勾选Pins，单击Pin，Dyn_Thermal_Con_Type
+
+140、如何由线生成Shape
+Shape -> Compose，Find面板勾选Lines，Options面板设置参数，然后选择线生成Shape
+
+141、如何将Shape打散成线
+Shape -> Decompose Shape，Find面板勾选Shapes，在Options面板设置要打散到的层面与其他参数
+
+142、如何分割负片并灌铜
+1、生成Route Keepin/ALL
+2、绘制AntiEtch/Layer，注意上下层不要跨线！
+Edit -> Split Plane -> Create

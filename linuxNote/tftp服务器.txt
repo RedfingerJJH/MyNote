@@ -1,0 +1,26 @@
+sudo apt-get install xinetd tftpd tftp
+
+sudo mkdir /tftpboot
+sudo chmod -R 777 /tftpboot
+sudo chown -R nobody /tftpboot
+
+sudo vim /etc/xinetd.d/tftp
+
+service tftp
+{
+    protocol        = udp
+    port            = 69
+    socket_type     = dgram
+    wait            = yes
+    user            = nobody
+    server          = /usr/sbin/in.tftpd
+    server_args     = /tftpboot
+    disable         = no
+}
+
+sudo service xinetd restart
+
+echo "Test TFTP Server" > /tftpboot/test.txt
+tftp <server-ip>
+tftp> get test.txt
+tftp> quit

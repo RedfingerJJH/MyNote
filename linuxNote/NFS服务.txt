@@ -1,0 +1,11 @@
+sudo apt-get install nfs-kernel-server rpcbind
+
+sudo mkdir /nfsboot
+sudo chmod -R 777 /nfsboot
+sudo chown -R nobody /nfsboot
+
+sudo vim /etc/exports 
+
+/nfsboot *(rw,sync,no_root_squash)
+
+sudo /etc/init.d/nfs-kernel-server restart

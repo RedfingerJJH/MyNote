@@ -1,0 +1,26 @@
+【ubuntu 18.04】
+sudo vim /etc/netplan/01-network-manager-all.yaml
+
+原文内容如下
+# Let NetworkManager manage all devices on this system
+network:
+  version: 2
+  renderer: NetworkManager
+  
+修改后的配置
+# Let NetworkManager manage all devices on this system
+network:
+  version: 2
+  renderer: NetworkManager
+
+  ethernets:
+    ens33:   #配置的网卡名称
+      dhcp4: no    #dhcp4关闭
+      dhcp6: no    #dhcp6关闭
+      addresses: [192.168.3.6/24]   #设置本机IP及掩码
+      gateway4: 192.168.3.1   #设置网关
+      nameservers:
+        addresses: [114.114.114.114, 8.8.8.8]   #设置DNS
+
+执行以下命令使得配置生效，然后IP 地址就变成了静态，并且ping 互联网的地址就正常了
+sudo netplan apply

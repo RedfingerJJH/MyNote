@@ -1,0 +1,110 @@
+15、如何打开Allegro并新建Brd
+High-Speed
+Symphony Team Design（联网）
+PCB Team Design（不联网）
+Allegro Productivity Toolbox
+Full GRE
+
+16、如设置封装库路径
+Setup -> User Preferences 
+Paths + Library
+勾选Expand，只保留.与..，然后增加自己的库路径
+把鼠标停在按钮上会显示库路径
+
+17、如何修改设计区域尺寸
+Setup -> Design Parameters，Design页面
+User unit：Mils
+Accuracy：4
+Long name size：255
+
+18、如何修改设计单位
+Setup -> Design Parameters，Design页面
+User unit：Mils或Millimeter，转换不要超过1次
+Enterprise也可以在状态栏打开设置窗体
+
+19、如何手工绘制板框
+Add -> Line
+Board Geometry + Outline，Line width：6
+x 0 0, ix 4000或x 4000 , iy 2000, ix -4000, iy -2000或x 0 0
+
+20、如何修改板框线线宽
+Edit -> Change
+find: 勾选Lines或Other segs（带C是电气线）
+options：勾选Line width，输入线宽值，然后回车
+
+21、如何倒圆角
+Manufacture -> Drafting -> Fillet
+Radius非0倒圆角，0恢复直角
+倒45度角：Manufacture -> Drafting -> Chamfer
+
+22、如何导入结构图
+File -> Import -> DXF
+先选择文件，再设置单位MM，勾选Incremental addition，点击Edit/View layers按钮
+先Select all，class选择DOARD GEOMETRY，点击New subclass创建Subclass（dxf-date），
+然后点击Map按钮
+
+23、如何显示和更改坐标原点
+先查出最左边直线的x坐标并锁定，最下边直线的y坐标锁定，
+Setup -> Design Parameters，Design页面，x与y分别输入上面的值，
+Display页面，勾选Design origin显示原点
+也可以先把左下角倒成直角，Setup -> Change Drawing Origin，
+待鼠标移近直角顶点时，点击右键，选择Snap pick to -> Segment Vertex
+
+24、如何由结构图生成板框
+Shape -> COmpose Shape
+Optins: Board Geometry + Outline
+Find: Other segs + lines
+在设计区域，右键Temp Group，选择需要的线段（按住ctrl点击取消选择），
+然后右键Complete，再右键Done
+
+25、如何绘制允许布局布线区域
+Edit -> Z-Copy
+Find: Shapes
+布线区域Option: ROUTE KEEPIN + ALL, 点选Contract，在Offset输入40，点选Outline
+布局区域Option: PACKAGE KEEPIN + ALL, 点选Contract，在Offset输入200，点选Outline
+
+26、如何设置区域允许器件高度
+Setup -> Areas -> Package Keepout
+OPtions: Package Keepout + All/Top/Bottom
+绘制Package Keepout区域，右键Done
+Setup -> Areas -> Package Height
+Find: Shapes
+OPtions: Package Keepout + All/Top/Bottom
+点选Package Keepout，在Max height输入值，右键Done
+
+27、如何导入第一方网表
+File -> Import -> Logic
+查看viewlog：File -> Viewlog
+
+28、如何快速放置后台器件
+Place -> Quickplace
+查看viewlog：File -> Viewlog
+
+29、如何使用ROOM方式放置后台器件
+选中器件，右键Edit Properties，点击New Property按钮，输入name与value，输出网表
+（器件要在后台）
+Setup -> Outlines -> Room Outline
+Place -> Quickplace, Place by room
+
+30、如何进行原理图与PCB交互布局
+Options -> Preferences -> Miscellaneous, 勾选Enable intertool Community
+输出网络表，导入网络表！！！
+比如在PCB执行move命令，Find：Symbols
+在原理图中选择器件，
+鼠标移回PCB中，任意空地点击，就抓起了原理图中选择的器件
+在PCB中找原理图中的器件，只能通过高亮
+
+31、如何按需要显示或隐藏飞线
+Display -> Show Rats -> All/Components/Net
+Display -> Blank Rats -> All/Components/Net
+
+32、如何设置层面颜色和打开所需层面
+Display -> Color/Visibility
+Geometry + Pin Number
+Visibility Pane
+
+33、如何设置各种格点
+Setup -> Grids
+布局一般设置25
+大小格点：5 5 5 5
+可以输入： =31.5/2（BGA）

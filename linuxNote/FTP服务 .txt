@@ -1,0 +1,6 @@
+sudo apt-get install vsftpd
+sudo vim /etc/vsftpd.conf
+开启如下两项：
+	local_enable=YES
+	write_enable=YES
+sudo /etc/init.d/vsftpd restart

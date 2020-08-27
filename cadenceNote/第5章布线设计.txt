@@ -1,0 +1,193 @@
+74、如何对BGA、SOP、QFN器件进行Fanout
+Route -> Create Fanout
+Find: Symbols 或Pins
+Options：注意各个参数
+
+75、如何快速将BGA扇好
+使用Create Fanout功能打好孔
+使用移线功能将前两排的过孔及其走线整体移到BGA外
+使用移线功能将第二排走线移到焊盘中间
+移线时关掉推挤与Smooth，地一般不外拉，可以使用方向键。
+
+76、如何修改走线线宽
+分修改已布线宽与连线时修改线宽
+Edit -> Change
+Find：Clines或Cline segs
+Options：勾选Line width，输入线宽值
+
+77、如何同时修改多种线宽
+使用到Toolbox功能
+Edit -> Change width
+Optins：选择一种线宽，高亮，输入New width（回车），框选要修改的高亮线（不会框选到其他）
+
+78、如何布弧形线
+Route -> Connect
+Options：Line lock选Arc
+
+79、如何十度布线
+新布线
+Route -> Connect
+Options：Line lock选Line与45，勾选Route offset，输入值
+已布线
+Route -> Unsupported Prototypes -> Fiber Wave Effect -> Add Zigzag Pattern
+
+80、如何打过孔
+在布线过程中双击或右键Add Via
+
+81、如何在打孔的同时自动添加回流孔
+在布线过程中右键Return Path Vias
+
+82、如何在布线过程中变换走线角度
+在布线过程中右键Toggle
+
+83、如何在走线过程中变换走线节点
+A、在布线过程中右键Target->New Target，点击新节点
+B、在布线过程中右键Target->Route from Target
+
+84、如何实现自动布线
+A、在布线过程中右键Finish
+B、切换到Etch Edit模式，Find面板选中Ratsnets，选中飞线，在任意一条飞线上右键Auto Connect
+
+85、如何草图布线
+在布线过程中右键Scribble Mode
+
+86、如何实现蛇形布线
+适用交错BGA出线：在布线过程中右键Snake Mode，有可能还需要Neck Mode
+
+87、如何实现紧贴弧形板边布线
+在布线过程中右键Contour
+
+88、如何移动走线与过孔
+Route->Slide
+Find面板：Clines与Vias，
+按住shift键或在Optios面板选中Extend Selection平移线段
+
+89、如何删除走线与过孔
+
+90、如何布差分线
+在布线过程中右键Enhanced Pad Entry
+
+91、如何整租走线和打孔
+在布线过程中右键
+
+92、如何使走线自动居中
+Route->Reize/Respace->Spread Between Voids（不能产生DRC）
+
+93、如何自动包地
+Route->Shield Route
+有Tandem与Side两种方式，
+
+94、如何自动包地并打孔
+Route->Shield Route，选择Advanced
+
+95、如何替换过孔或器件焊盘
+Tools->Padstack->Replace
+
+96、如何复制过孔与走线
+Edit->Copy
+
+97、如何修改过孔网络
+先Setup->Etch Edit
+Logic->Assign net to via
+（Find面板选中Vias，选中过孔右键Assign net to via，可以在下拉列表或板上选择网络）
+
+98、如何高亮网络
+Display->Assign Color
+
+99、如何取消高亮网络
+Display->Dehighlight
+
+100、如何快速高亮整组网络
+Display->Assign Color，设置好参数，然后到约束规则器中选择网络组
+
+101、如何复用过孔、走线与器件
+Setup->Application Mode->Placement Edit
+Find面板选择Symbols，选择器件，在任意器件上右键Place replicate create，
+可以补充选择过孔与走线，右键Done，选择参考点，然后存为模板。
+复用：选择器件，右键Place replicate apply，选择模板。
+失配时取消勾选Device name与value。
+更新：Find面板选择Group，选择建立面板的器件，右键Place replicate update。
+走线出现小方块，Group的原因。
+
+102、如何查询网络信息
+Display->Element，Find面板选择Nets，然后单击网络
+
+103、如何查询走线信息
+Display->Element，Find面板选择Clines（两个焊盘/过孔同层走线），然后单击网络
+
+104、如何进行斜线与弧形线互转
+Route->unsupported prototype->Auto-interactive Convert Corner
+Options面板设置转换参数 ，Find面板设置线或网络
+
+105、如何快速整板打孔
+Place->Vias Array->Matrix 
+勾选Enable，选择模式，设置好参数，板上单击。最后右键Done
+删除过孔，Edit->Delete，Find面板，Find by name下拉列表框中选择Property，点击More，
+选择Viaarray开头的Property，点击OK，右键Done
+
+106、如何打缝边孔
+Place->Vias Array->Boundary
+
+107、如何打包地孔
+Place->Vias Array->Boundary
+
+108、如何设置ICT测试点参数
+......
+
+109、如何自动添加ICT测试点
+.......
+
+110、如何手动添加ICT测试点
+.......
+
+111、如何输出ICT测试点报告
+......
+
+112、如何添加泪滴
+Route->GLOSS->Parameters...，设置参数，
+不要勾选Run，点前面的小方块设置参数（Global Option勾选下面两项，注意Dynamic），点close，而不是GLoss
+Route->GLOSS->Add Teardrop
+
+113、如何添加渐变线
+A: Route->GLOSS->Parameters...，设置参数，
+不要勾选Run，点前面的小方块设置参数（Global Option勾选下面两项），点close，而不是GLoss
+B: Route->GLOSS->Add Tapered Trace，增加渐变线
+
+114、如何设置T点
+Logic->Net Schedule
+Find：Nets，单击Nets，单击T点起始点，右键插入T点
+单击放下T点，单击一个分支，单击T点，单击另一分支，单击T点，单击上拉电阻，右键Finish
+
+115、如何去除T点
+Logic->Net Schedule
+Find：Nets，单击Nets，右键Unschedule Net，右键Finish
+或者使用约束管理器（Electrical Contraint/Net/Routing/wiring）Clear
+
+116、如何测量走线、过孔间距
+Display->Measure
+
+117、如何整体翻转走线、过孔、铜箔、器件
+Edit->Advanced mirror...
+Options：Mirror type（Geometry and Layer），Mode（Move）
+
+118、如何用颜色区分组内等长情况
+Route->Timing Vision
+Options面板勾选Match...与XNet...
+
+119、如何实现自动相位等长
+Route->Auto-interactive Phase Tune
+勾选Options面板所有参数
+
+120、如何实现自动等长
+Route->Auto-interactive Delay Tune
+在Options面板设置好参数，框选要等长的网络
+Route->Timing Vision查看结果，勾选Match...与XNet...
+
+121、如何快速修改差分线线宽线距
+Route->unsupported prototype->Resize/Respace Diff Pairs
+框选差分对进行修改，斜线需要手工调整
+
+122、如何实现无盘设计
+Setup->Cross-section
+勾选Physical下Unused Pin Suppression和Unused Via Suppression
+勾选Unused Pads Suppression面板下的2个选项

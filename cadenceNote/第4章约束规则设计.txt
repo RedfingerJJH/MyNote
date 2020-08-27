@@ -1,0 +1,126 @@
+51、如何添加叠层
+Setup -> Cross-section
+
+52、如何导入导出叠层
+Setup -> Cross-section
+导出：Export -> Cross Section Technology File
+导入：Import -> Cross Section Technology File
+
+53、如何设置电源地电压值
+Logic -> Identify DC Nets
+设置了电压值的网络飞线变为带斜十字的方块
+删除电压值：Edit -> Properties，Find面板Nets，点击要删除的网络，勾选Voltage与
+Ratsnets_Schedule
+
+54、如何创建或去除Xnet
+Analyze -> Model Assignment
+先在PCB选中一个电阻（列表框中相应也选中），然后选择它的种类，再Create Model，
+选择Create ESpiceDevice model，在弹出窗体中，
+Value不能为空，在Single Pins输入：1 2（排阻: 1 8 2 7 3 6 4 5, 2个构成一个电阻）。
+打开规则约束管理器，左边选择Physical -> Net -> All Layers，右边在Xnet上右击可以更改网络名称。
+要做仿真，上拉电阻也要设置Model。
+对于创建了Model的电阻去除Model，在PCB中选中电阻（列表框中相应也选中），
+在Model下拉框选择No Model。整个种类去除操作类似。
+
+55、如何添加或去除过孔
+打开规则约束管理器，左边选择Physical -> Physical Constraint Set -> All Layers，
+在右边Vias列DEFAULT行（或其他行）点击，在弹出窗体中左列表双击增加，右列表双击去除。
+
+56、如何快速添加盲埋孔
+先准备盲孔模板（4/10），埋孔其实就是通孔（10/22）
+Setup -> B/B Via Definitions -> Define B/B Via
+
+57、如何创建Class
+Class用于Physical与Spacing，不能用于Electrical
+打开规则约束管理器，
+左边：Physical -> Net -> All Layer
+右边：选中网络，右键Create -> Class，勾选Create for both physical and spacing
+
+58、如何创建PinPair
+打开规则约束管理器
+左边：Electrical -> Net -> Routing -> Relative Proppagation Delay
+右边：在要创建PinPair的网络上右键Create -> Pin Pair，选择First Pins与Second Pins，
+点击Apply（可重复），最后OK。Create On all valid worksheet可不选。
+
+59、如何创建NetGroup
+NetGroup通用性强，但不能设置两者之间的关系，Class可以
+打开规则约束管理器
+左边：Electrical -> Net -> Routing -> Relative Propagation Delay
+右边：选择网络，右键Create -> Net Group
+
+60、如何绘制特殊规则区域
+Shape -> Rectangular
+Options：Constraint Region + All，Assign to Region中输入或选择约束规则名称。
+
+61、如何快速创建差分对
+打开约束规则管理器
+左边：Physical -> Net -> All Layers
+右边：在要创建差分对的网络上右键Create -> Differential Pair，
+在弹出窗体上点击Auto Setup，Filter：P/N，+/-
+
+62、如何设置线宽规则
+打开约束规则管理器
+左边：Physical -> Physical Constraint Set -> All Layers
+右边：DEFAULT，点击Type下的星号，去除勾选Layer Type。新的规则最好在要继承的规则上创建。
+把规则分配到网络
+左边：Physical -> Net -> All Layers
+右边：选择要设置规则的网络，右键Constraint Set References
+把规则分配到区域
+左边：Physical -> Region -> All Layers
+右边：可以设置Referenced Physical CSet，也可以只输入差异数值（空白地方按DEFAULT规则）
+
+63、如何设置间距规则
+首先需要知道板厂参数，注意区分样板与批量
+打开约束规则管理器
+左边：Spacing -> Spacing Constraint Set -> All Layers
+右边：相同值，先拖动，在输入，继承规则一般只需修改Line。
+
+64、如何设置多种间距规则
+打开约束规则管理器
+左边：Spacing -> Net Class-CLass -> All Layers
+右边：在Net Class上右键Create -> Class-Class，两边网络选择相同（自己跟自己），
+自己跟自己Referenced Physical CSet设置不变，Class-Class设置为新规则，
+这样就设置好了组内与组间规则
+
+65、如何设置点到点源同步信号的相对延时等长规则
+打开约束规则管理器
+左边：Electrical -> Net -> Routing ->  Relative Propagation Delay
+右边：选中网络（主要是Net Group内），右键Create -> Match Group，
+先设置Delta:Tolerance单位，mil或ns，Match Group行输入类似0:20这样的值，
+然后选定一条线Set as target。黄色表示线没走完或检查规则没打开，
+Analyze -> Analysis Modes
+
+67、如何设置绝对等长延时规则
+打开约束规则管理器
+左边：Electrical -> Net -> Routing ->  Min/Max Propagation Delay
+右边：选中网络（Net Group或Net Class），输入Prop Delay最小/最大值
+
+68、如何设置差分线静态和动态等长规则
+打开约束规则管理器
+左边：Electrical -> Net -> Routing ->  Differential Pair
+右边：动态等长意义更大，设计难度也更大，列拖动，一次可输入多个相同的值。
+
+69、如何设置最大过孔数量
+打开约束规则管理器
+左边：Electrical -> Net -> Routing ->  Vias
+右边：列拖动，一次可输入多个相同的值。
+
+70、如何设置走线允许层面
+打开约束规则管理器
+左边：Electrical -> Net -> Routing ->  Wiring
+右边：层对名称类似：top-bottom
+
+71、如何设置禁止过孔上焊盘
+打开约束规则管理器
+左边：Physical -> Physical Constraint Set -> All Layers
+右边：Allow -> Pad-Pad Connect：NOT_ALLOWED
+
+72、如何导入器件管脚长度
+File -> Import -> Pin Delay
+选择csv格式文件，如果器件位号不对应，需在板上选择器件
+打开约束规则管理器，Analyze -> Analysis Mode，勾选Electrical -> Pin Delay
+
+73、如何导入导出约束规则
+打开约束规则管理器
+导出：File -> Export -> Constraints，选择导出项
+导入：File -> Import -> Constraints，选择导入方式

@@ -1,0 +1,13 @@
+yy@ubuntu:~$ cd /usr/local
+yy@ubuntu:~$ sudo mkdir arm
+yy@ubuntu:~$ sudo chmod 777 arm
+yy@ubuntu:~$ cd arm
+yy@ubuntu:~$ cp /home/yy/linux/tool/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf.tar.xz gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf.tar.xz
+yy@ubuntu:~$ sudo tar -xvf gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf.tar.xz
+yy@ubuntu:~$ sudo vim /etc/profile
+在文件的尾部添加如下行
+	export PATH=$PATH:/usr/local/arm/gcc-linaro-4.9.4-2017.01-x86_64_arm-linux-gnueabihf/bin
+yy@ubuntu:~$ source  /etc/profile
+yy@ubuntu:~$ sudo apt-get install lsb-core lib32stdc++6 
+yy@ubuntu:~$ arm-linux-gnueabihf-gcc -v
+yy@ubuntu:~$ sudo apt-get install libncurses5-dev

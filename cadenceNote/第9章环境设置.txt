@@ -1,0 +1,63 @@
+182、如何设置光标显示方式和修复光标拖影
+Setup -> User Preferences
+Display + Cursor
+infinite_cursor_bug_nt修复光标拖影
+infinite大十字 cross小十字 octal大米字
+pcb_cursor_angle大十字角度
+
+183、如何支持超长字符与4位精度
+Setup -> User Preferences
+Drawing
+allegro_long_name_size 255 
+drawing_4mils 4位精度
+drawing_no_4mils_msg 4位精度警告，一般不选
+
+184、如何使测量报告中显示公英制两种单位数据
+Setup -> User Preferences
+Display + Element
+showmeasure_altunit中选择另一种单位
+
+185、如何开关OpenGL模式
+Setup -> User Preferences
+Opengl -> disable_opengl
+
+186、如何使动态铜与静态铜区分显示
+Setup -> User Preferences
+Opengl -> static_shapes_fill_sold
+
+187、如何不显示铜箔或只显示外框
+Setup -> User Preferences
+display -> Shape_fill
+no_etch_shape_display不显示铜箔
+no_shape_fill只显示外框
+
+188、如何实心显示DRC标记
+Setup -> User Preferences
+display -> Visual
+display_drcfill实心显示DRC标记
+
+189、如何设置自动保存
+Setup -> User Preferences
+File_management ->Autosave
+
+190、如何显示时序等长进度条
+Setup -> User Preferences
+Route -> Connect
+allegro_dynam_timing是否显示进度条
+allegro_dynam_timing_fixedpos位置固定
+allegro_etch_length_on实时长度
+
+191、如何设置DRC标记大小
+Setup -> Design Parameters
+Display + DRC marker size
+
+192、如何打开和关闭网络名显示
+Setup -> Design Parameters
+Display + CLines/Shapes/Pins
+
+193、如何显示埋忙孔层标
+Setup -> Design Parameters
+Display勾选Drill labels
+
+194、如何设置规范的显示效果
+Setup -> Design Parameters

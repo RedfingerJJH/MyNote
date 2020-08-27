@@ -1,0 +1,13 @@
+setenv ipaddr 192.168.3.2
+setenv ethaddr 00:04:9f:04:d2:35
+setenv gatewayip 192.168.3.1
+setenv netmask 255.255.255.0
+setenv serverip 192.168.3.6
+saveenv 
+
+tftp 80800000 zImage
+tftp 83000000 imx6ull-alientek-emmc.dtb
+bootz 80800000 – 83000000
+
+tftp 87800000 printf.bin
+go 87800000

@@ -1,0 +1,26 @@
+一、设定元器件外形
+Setup -> Areas -> Package Boundary
+Package Geometry + Place_Bound_Top（不需要Add -> Line）
+
+二、设定元器件高度
+Setup -> Areas -> Package Height
+Package Geometry + Place_Bound_Top
+
+三、添加丝印外形
+Add -> Line
+Package Geometry + Silkscreen_Top
+
+四、添加元器件标志
+Layout -> Labels -> RefDes
+Ref Des + Silkscreen_Top
+在1脚旁输入U*
+
+五、添加装配层
+Add -> Line
+Package Geometry + Assbemly_Top
+
+六、添加装配层标志（*）
+Layout -> Labels -> RefDes
+Ref Des + Assbemly_Top
+任意位置输入U*
+

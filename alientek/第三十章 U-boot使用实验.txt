@@ -1,0 +1,192 @@
+一、U-Boot简介
+uboot官网为：http://www.denx.de/wiki/U-Boot/
+nxp下载地址为：http://git.freescale.com/git/cgit.cgi/imx/uboot-imx.git/tag/?h=imx_v2016.03_4.1.15_2.0.0_ga&id= 
+rel_imx_4.1.15_2.1.0_ga
+文件：uboot-imx-rel_imx_4.1.15_2.1.0_ga.tar.bz2
+原子：uboot-imx-rel_imx_4.1.15_2.1.0_ga_alientek.tar.bz2
+
+二、U-Boot初次编译
+sudo apt-get install libncurses5-dev
+tar -vxjf uboot-imx-2016.03-2.1.0-g4475ea1-v1.3.tar.bz2
+
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- mx6ull_14x14_ddr512_emmc_defconfig
+make V=1 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j12
+
+三、U-boot烧写与启动
+chmod 777 imxdownload
+./imxdownload u-boot.bin /dev/sdd
+
+四、U-Boot命令使用
+help或?
+help或?命令名，例如：help bootz
+
+1、信息查询命令：bdinfo、printenv、version
+
+2、环境变量操作命令：setenv、saveenv
+
+2.1、修改环境变量
+setenv bootdelay 5
+saveenv
+
+setenv bootargs 'console=ttymxc0,115200 root=/dev/mmcblk1p2 rootwait rw' 
+saveenv
+
+2.2、新建环境变量
+setenv author jiangjunhua
+saveenv
+
+2.3、删除环境变量
+setenv author
+saveenv
+
+3、内存操作命令：md、nm、mm、mw、cp、cmp
+
+3.1、md命令:用于显示内存值
+md[.b, .w, .l] address [# of objects]
+md.b 80000000 14  //uboot 命令中的数字都是十六进制的！不是十进制的！
+
+3.2、nm命令:用于修改指定地址的内存值
+nm[.b, .w, .l] address
+修改后，输入q退出
+
+3.3、mm命令：修改指定地址内存值，地址会自增，输入q退出
+
+3.4、mw命令：用于使用一个指定的数据填充一段内存
+mw[.b, .w, .l] address value [count]
+
+3.5、cp命令：用于将DRAM中的数据从一段内存拷贝到另一段内存中，或者把Nor Flash中的数据拷贝到DRAM中
+cp[.b, .w, .l] source target count
+
+3.6、cmp命令：用于比较两段内存的数据是否相等
+cmp[.b, .w, .l] addr1 addr2 count
+
+4、网络操作命令：dhcp、ping、nfs、tftpboot
+setenv ipaddr 192.168.1.50 
+setenv ethaddr 00:04:9f:04:d2:35 
+setenv gatewayip 192.168.1.1 
+setenv netmask 255.255.255.0 
+setenv serverip 192.168.1.250 
+saveenv 
+
+4.1、ping命令
+ping 192.168.1.250
+
+4.2、dhcp命令
+DHCP不单单是获取IP地址，其还会通过TFTP来启动linux内核
+
+4.3、nfs命令
+nfs [loadAddress] [[hostIPaddr:]bootfilename]
+nfs 80800000 192.168.1.250:/home/yy/linux/nfs/zImage
+
+4.4、tftp命令
+tftpboot [loadAddress] [[hostIPaddr:]bootfilename]
+tftp 80800000 zImage
+
+5、EMMC和SD卡操作命令
+mmc是一系列的命令，其后可以跟不同的参数，输入？mmc即可查看mmc有关的命令
+5.1、mmc info 命令
+用于输出当前选中的 mmc info 设备的信息
+
+5.2、mmc rescan 命令
+用于扫描当前开发板上所有的 MMC 设备
+
+5.3、mmc list 命令
+用于来查看当前开发板一共有几个 MMC 设备
+
+5.4、mmc dev 命令
+用于切换当前 MMC 设备
+mmc dev [dev] [part]  //[dev]用来设置要切换的 MMC 设备号，[part]是分区号。如果不写分区号的话默认为分区 0
+mmc dev 0             //切换到 SD 卡，0 为 SD 卡，1 为 eMMC
+
+5.5、mmc part 命令
+mmc dev 1      //切换到 EMMC 
+mmc part       //查看 EMMC 分区 
+
+5.6、mmc read 命令
+mmc read addr blk# cnt //addr 是数据读取到 DRAM 中的地址，blk 是要读取的块起始地址，一个块是 512字节，这里的块和扇区是一个意思，在 MMC 设备中我们通常说扇区，cnt 是要读取的块数量
+mmc dev 1 0                        //切换到 MMC 分区 0 
+mmc read 80800000 600 10           //读取数据 
+
+5.7、mmc write 命令
+mmc write addr blk# cnt 
+mmc dev 1 0                                //切换到 EMMC 分区 0 
+tftp 80800000 u-boot.imx                   //下载 u-boot.imx 到 DRAM 
+mmc write 80800000 2 32E                   //烧写 u-boot.imx 到 EMMC 中 
+mmc partconf 1 1 0 0                       //分区配置，EMMC 需要这一步！ 
+
+5.8、mmc erase 命令
+mmc erase blk# cnt 
+
+6、FAT格式文件系统操作命令
+6.1、fatinfo 命令
+fatinfo <interface> [<dev[:part]>] //interface 表示接口，比如 mmc，dev 是查询的设备号，part 是要查询的分区
+fatinfo mmc 1:1
+
+6.2、fatls命令
+fatls <interface> [<dev[:part]>] [directory]
+fatls mmc 1:1
+
+6.3、fstype命令
+fstype <interface> <dev>:<part>
+fstype mmc 1:0
+fstype mmc 1:1
+fstype mmc 1:2
+
+6.4、fatload命令
+fatload <interface> [<dev[:part]> [<addr> [<filename> [bytes [pos]]]]]
+fatload mmc 1:1 80800000 zImage
+
+6.5、fatwrite命令
+uboot默认没有使能fatwrite命令
+#define CONFIG_FAT_WRITE  /* 开发板配置头文件中使能 fatwrite 命令 */ 
+fatwrite <interface> <dev[:part]> <addr> <filename> <bytes>
+tftp 80800000 zImage
+fatwrite mmc 1:1 80800000 zImage 0x5c2720 /* 0x5c2720为文件大少 */
+
+7、EXT格式文件系统操作命令
+常用的命令，分别为：ext2load、ext2ls、ext4load、ext4ls 和 ext4write。这些命令的含义和使用与 fatload、fatls 和 fatwrit一样
+
+8、NAND操作命令
+
+9、BOOT操作命令
+9.1、bootz命令
+bootz [addr [initrd[:size]] [fdt]]
+tftp 80800000 zImage
+tftp 83000000 imx6ull-alientek-emmc.dtb
+bootz 80800000 – 83000000
+
+9.2、bootm命令
+bootm addr
+如果要使用设备树，那么bootm命令和bootz一样，命令格式如下： 
+bootm [addr [initrd[:size]] [fdt]]
+
+9.3、boot命令
+boot 会读取环境变量 bootcmd 来启动 Linux
+setenv bootcmd 'tftp 80800000 zImage; tftp 83000000 imx6ull-alientek-emmc.dtb; bootz 80800000 - 83000000' 
+saveenv 
+boot 
+
+10、其他常用命令
+10.1、reset命令
+
+10.2、go命令：用于跳到指定的地址处执行应用
+go addr [arg ...] //可以用于测试裸机程序
+tftp 87800000 printf.bin 
+go 87800000
+
+10.3、run命令：用于运行环境变量中定义的命令
+run bootcmd
+
+setenv mybootemmc 'fatload  mmc 1:1  80800000  zImage;  fatload mmc 1:1  83000000  imx6ull-alientek-emmc.dtb; bootz 80800000 - 83000000' 
+setenv  mybootnand  'nand  read  80800000  4000000  800000;nand  read  83000000  6000000 100000; bootz 80800000 - 83000000' 
+setenv  mybootnet  'tftp  80800000  zImage;  tftp  83000000  imx6ull-alientek-emmc.dtb;  bootz 80800000 - 83000000'
+saveenv
+
+run mybootemmc
+run mytoobnand
+run mybootnet
+
+10.4、mtest命令：简单的内存读写测试命令
+mtest [start [end [pattern [iterations]]]]
+结束测试Ctrl+C
