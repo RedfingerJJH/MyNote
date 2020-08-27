@@ -1,0 +1,60 @@
+31.1 U-Boot 工程目录分析
+cd alientek_uboot	//进入正点原子 uboot 源码目录
+./mx6ull_alientek_emmc.sh	//编译 uboot
+cd ../	//返回上一级目录
+tar -vcjf alientek_uboot.tar.bz2 alientek_uboot	//压缩
+
+u-boot：编译出来的 ELF 格式的 uboot 镜像文件。 
+u-boot.bin：编译出来的二进制格式的 uboot 可执行镜像文件。 
+u-boot.cfg：uboot 的另外一种配置文件。 
+u-boot.imx：u-boot.bin 添加头部信息以后的文件，NXP 的 CPU 专用文件。 
+u-boot.lds：链接脚本。 
+u-boot.map：uboot 映射文件，通过查看此文件可以知道某个函数被链接到了哪个地址上。 
+u-boot.srec：S-Record 格式的镜像文件。 
+u-boot.sym：uboot 符号文件。 
+u-boot-nodtb.bin：和 u-boot.bin 一样，u-boot.bin 就是 u-boot-nodtb.bin 的复制文件。
+
+README 文件描述了 uboot 的详细信息，包括 uboot 该如何编译、uboot 中各文件夹的含
+义、相应的命令等等
+
+31.2 VScode 工程创建
+新建文件夹：.vscode
+新建文件：settings.json
+
+31.3 U-Boot 顶层 Makefile 分析
+PHONY += scripts_basic
+scripts_basic:
+	$(Q)$(MAKE) $(build)=scripts/basic
+	$(Q)rm -f .tmp_quiet_recordmcount
+
+# To avoid any implicit rule to kick in, define an empty command.
+scripts/basic/%: scripts_basic ;
+
+PHONY += outputmakefile
+# outputmakefile generates a Makefile in the output directory, if using a
+# separate output directory. This allows convenient use of make in the
+# output directory.
+outputmakefile:
+ifneq ($(KBUILD_SRC),)
+	$(Q)ln -fsn $(srctree) source
+	$(Q)$(CONFIG_SHELL) $(srctree)/scripts/mkmakefile \
+	    $(srctree) $(objtree) $(VERSION) $(PATCHLEVEL)
+endif
+
+==》
+scripts_basic: 
+    @make -f ./scripts/Makefile.build obj=scripts/basic     //也可以没有@，视配置而定 
+    @rm -f . tmp_quiet_recordmcount                         //也可以没有@ 
+	
+%config: scripts_basic outputmakefile FORCE 
+    $(Q)$(MAKE) $(build)=scripts/kconfig $@
+==》@make -f ./scripts/Makefile.build obj=scripts/kconfig xxx_defconfig
+
+make xxx_defconfig配置uboot的时候如下两行命令会执行脚本scripts/Makefile.build： 
+@make -f ./scripts/Makefile.build obj=scripts/basic 
+@make -f ./scripts/Makefile.build obj=scripts/kconfig xxx_defconfig
+
+src= scripts/kconfig
+kbuild-dir = ./scripts/kconfig
+kbuild-file = ./scripts/kconfig/Makefile
+include ./scripts/kconfig/Makefile

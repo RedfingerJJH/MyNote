@@ -1,11 +1,11 @@
-一、U-Boot简介
+30.1 U-Boot 简介
 uboot官网为：http://www.denx.de/wiki/U-Boot/
 nxp下载地址为：http://git.freescale.com/git/cgit.cgi/imx/uboot-imx.git/tag/?h=imx_v2016.03_4.1.15_2.0.0_ga&id= 
 rel_imx_4.1.15_2.1.0_ga
 文件：uboot-imx-rel_imx_4.1.15_2.1.0_ga.tar.bz2
 原子：uboot-imx-rel_imx_4.1.15_2.1.0_ga_alientek.tar.bz2
 
-二、U-Boot初次编译
+30.2 U-Boot 初次编译（mx6ull_alientek_emmc.sh）
 sudo apt-get install libncurses5-dev
 tar -vxjf uboot-imx-2016.03-2.1.0-g4475ea1-v1.3.tar.bz2
 
@@ -13,11 +13,11 @@ make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- distclean
 make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- mx6ull_14x14_ddr512_emmc_defconfig
 make V=1 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j12
 
-三、U-boot烧写与启动
+30.3 U-Boot 烧写与启动
 chmod 777 imxdownload
 ./imxdownload u-boot.bin /dev/sdd
 
-四、U-Boot命令使用
+30.4 U-Boot 命令使用
 help或?
 help或?命令名，例如：help bootz
 
