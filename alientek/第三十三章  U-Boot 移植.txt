@@ -1,0 +1,30 @@
+33.1 NXP 官方开发板 uboot 编译测试
+uboot-imx-rel_imx_4.1.15_2.1.0_ga.tar.bz2
+tar -vxjf uboot-imx-rel_imx_4.1.15_2.1.0_ga.tar.bz2
+
+make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- mx6ull_14x14_evk_emmc_defconfig
+make V=1 ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- -j12
+
+33.2  在 U-Boot 中添加自己的开发板
+cd configs
+cp mx6ull_14x14_evk_emmc_defconfig    mx6ull_alientek_emmc_defconfig
+
+mx6ull_alientek_emmc_defconfig内容：
+CONFIG_SYS_EXTRA_OPTIONS="IMX_CONFIG=board/freescale/mx6ull_alientek_emmc/imximage.cfg,MX6ULL_EVK_EMMC_REWORK"
+CONFIG_ARM=y
+CONFIG_ARCH_MX6=y
+CONFIG_TARGET_MX6ULL_ALIENTEK_EMMC=y
+CONFIG_CMD_GPIO=y
+
+cp include/configs/mx6ullevk.h mx6ull_alientek_emmc.h
+拷贝完成以后将:
+#ifndef __MX6ULLEVK_CONFIG_H
+#define __MX6ULLEVK_CONFIG_H
+改为:
+#ifndef __MX6ULL_ALIENTEK_EMMC_CONFIG_H
+#define __MX6ULL_ALIENTEK_EMMC_CONFIG_H
+
+cd board/freescale/
+cp mx6ullevk/ -r mx6ull_alientek_emmc
+cd mx6ull_alientek_emmc
+mv mx6ullevk.c mx6ull_alientek_emmc.c
