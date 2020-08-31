@@ -1,0 +1,82 @@
+32.1  链接脚本u-boot.lds详解
+_start在文件arch/arm/lib/vectors.S中有定义
+u-boot.map是uboot的映射文件，可以从此文件看到某个文件或者函数链接到了哪个地址
+
+32.2 U-Boot 启动流程详解
+从 u-boot.lds 中我们已经知道了入口点是 arch/arm/lib/vectors.S 文件中的_start
+reset 函数在 arch/arm/cpu/armv7/start.S 里面
+
+函数 lowlevel_init 在文件 arch/arm/cpu/armv7/lowlevel_init.S 中定义
+
+s_init 函数定义在文件 arch/arm/cpu/armv7/mx6/soc.c 中，
+
+_main 函数定义在文件 arch/arm/lib/crt0.S 中
+
+_main 中会调用 board_init_f 函数，board_init_f 函数主要有两个工作： 
+    ①、初始化一系列外设，比如串口、定时器，或者打印一些消息等。 
+    ②、初始化 gd 的各个成员变量，uboot 会将自己重定位到 DRAM 最后面的地址区域，也就
+是将自己拷贝到 DRAM 最后面的内存区域中。这么做的目的是给 Linux 腾出空间，防止 Linux 
+kernel 覆盖掉 uboot，将 DRAM 前面的区域完整的空出来。在拷贝之前肯定要给 uboot 各部分
+分配好内存位置和大小，比如 gd 应该存放到哪个位置，malloc 内存池应该存放到哪个位置等
+等。这些信息都保存在 gd 的成员变量中，因此要对 gd 的这些成员变量做初始化。最终形成一
+个完整的内存“分配图”，在后面重定位 uboot 的时候就会用到这个内存“分配图”。
+此函数定义在文件 common/board_f.c 中定义
+
+#define U_BOOT_CMD(_name, _maxargs, _rep, _cmd, _usage, _help)	\
+U_BOOT_CMD_COMPLETE(_name, _maxargs, _rep, _cmd, _usage, _help, NULL)
+
+#define U_BOOT_CMD_COMPLETE(_name, _maxargs, _rep, _cmd, _usage, _help, _comp) \
+    ll_entry_declare(cmd_tbl_t, _name, cmd) =	\ 
+    U_BOOT_CMD_MKENT_COMPLETE(_name, _maxargs, _rep, _cmd, _usage, _help, _comp);
+
+#define ll_entry_declare(_type, _name, _list)	\
+    _type _u_boot_list_2_##_list##_2_##_name __aligned(4)	\
+    __attribute__((unused, section(".u_boot_list_2_"#_list"_2_"#_name)))
+	
+#define U_BOOT_CMD_MKENT_COMPLETE(_name, _maxargs, _rep, _cmd, _usage, _help, _comp)           \ 
+        { #_name, _maxargs, _rep, _cmd, _usage, _CMD_HELP(_help) _CMD_COMPLETE(_comp) }
+
+#ifdef CONFIG_AUTO_COMPLETE
+# define _CMD_COMPLETE(x) x,
+#else
+# define _CMD_COMPLETE(x)
+#endif
+
+#ifdef CONFIG_SYS_LONGHELP
+# define _CMD_HELP(x) x,
+#else
+# define _CMD_HELP(x)
+#endif
+
+U_BOOT_CMD(
+    dhcp,   3,  1,  do_dhcp,
+    "boot image via network using DHCP/TFTP protocol",
+    "[loadAddress] [[hostIPaddr:]bootfilename]"
+);
+==》
+U_BOOT_CMD_COMPLETE(dhcp, 3, 1, do_dhcp,  
+                    "boot image via network using DHCP/TFTP protocol", 
+                    "[loadAddress] [[hostIPaddr:]bootfilename]",  
+                    NULL) 
+==》
+ll_entry_declare(cmd_tbl_t, dhcp, cmd) =           \ 
+U_BOOT_CMD_MKENT_COMPLETE(dhcp, 3, 1, do_dhcp,  \ 
+                 "boot image via network using DHCP/TFTP protocol", \ 
+                 "[loadAddress] [[hostIPaddr:]bootfilename]", \ 
+                 NULL);
+==》
+cmd_tbl_t _u_boot_list_2_cmd_2_dhcp __aligned(4)       \ 
+        __attribute__((unused,section(.u_boot_list_2_cmd_2_dhcp))) \                 
+        { "dhcp", 3, 1, do_dhcp,  \ 
+          "boot image via network using DHCP/TFTP protocol", \ 
+          "[loadAddress] [[hostIPaddr:]bootfilename]",\  
+          NULL} 
+==》
+cmd_tbl_t _u_boot_list_2_cmd_2_dhcp __aligned(4)       \
+    __attribute__((unused,section(.u_boot_list_2_cmd_2_dhcp))) \               
+    { "dhcp", 3, 1, do_dhcp,  \ 
+    "boot image via network using DHCP/TFTP protocol", \ 
+    "[loadAddress] [[hostIPaddr:]bootfilename]",\  
+    NULL}
+
+32.3 bootz 启动 Linux 内核过程 
