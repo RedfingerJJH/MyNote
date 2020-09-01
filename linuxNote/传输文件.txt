@@ -1,0 +1,45 @@
+df
+cd /run/media/sda1
+ls
+touch test
+cp test /home/yy/
+ls /home/yy/
+sync
+cd -
+umount /run/media/sda1
+df
+
+df
+cd +sd卡的挂载路径
+ls
+sudo cp test /home/
+
+ifconfig
+拷贝文件：scp 文件 用户名@ip地址：路径
+拷贝文件夹：scp -r 文件夹 用户名@ip地址：路径
+scp test.c root@192.168.1.12:/home/root/
+
+emmc更新固件：
+1、uboot
+u-boot-imx6ull-14x14-ddr512-emmc.imx
+执行下面的指令，先使能 emmc 启动分区，才能进行烧写。 
+echo  0  >  /sys/block/mmcblk1boot0/force_ro 
+开始把当前目录下的烧写至 eMMC 的启动分区 
+dd  if=u-boot-imx6ull-14x14-ddr512-emmc.imx  of=mmcblk1boot0  bs=1024  seek=1  conv=fsync 
+烧写完成后，关闭要烧写的启动分区
+echo 1 >/sys/block/mmcblk1boot0/force_ro
+
+2、dtb
+使用 ls 指令查看 eMMC 的 boot 分区设备树所在的目录，如下图，有各种屏对应的设备树，根
+据个人的屏的使用对应的设备树即可，如果没有屏，默认使用的是 imx6ull-14x14-emmc-4.3-48
+0x272-c.dtb 这个设备树，更新这个设备树即可。 
+ls /run/media/mmcblk1p1
+
+3、zImage
+将zImage直接替换到eMMC的挂载目录/run/media/mmcblk1p1下就可以了
+
+4、modules
+先将内核模块拷贝到eMMC文件系统目录下
+tar xf modules.tar.bz2 -C /lib/modules/
+
+

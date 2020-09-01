@@ -1,0 +1,69 @@
+1、安装git
+sudo apt-get install git
+
+2、配置 git 用户信息
+git config --global user.name "RedfingerJJH"
+git config --global user.email "jjh.2004@outlook.com"
+git config --list
+
+3、下载repo
+mkdir fsl-release-bsp
+cd fsl-release-bsp
+http://commondatastorage.googleapis.com/git-repo-downloads/repo
+或https://raw.githubusercontent.com/dzm2018/alientek-git-repo-downloads/master/repo
+curl  https://raw.githubusercontent.com/dzm2018/alientek-git-repo-downloads/master/repo  >  ./repo
+或git clone https://github.com/dzm2018/alientek-git-repo-downloads.git
+chmod u+x repo
+
+4、获取yocto项目
+http://git.freescale.com/git/cgit.cgi/imx/fsl-arm-yocto-bsp.git
+./repo init -u git://git.freescale.com/imx/fsl-arm-yocto-bsp.git -b imx-4.1-krogoth
+或./repo init -u https://source.codeaurora.org/external/imx/fsl-arm-yocto-bsp -b imx-4.1-krogoth （3个y确认）
+repo sync
+
+5、构建根文件系统
+下面是发行版（DISTRO）的四种配置： 
+     fsl-imx-x11 -只有 X11 图形 
+     fsl-imx-wayland - Wayland weston graphics 
+     fsl-imx-xwayland - Wayland graphics and X11。不支持使用 EGL 的 X11 应用程序 
+     fsl-imx-fb -帧缓冲图形-没有 X11 或 Wayland 
+支持的machine：ls sources/meta-fsl-bsp-release/imx/meta-bsp/conf/machine 
+
+镜像：
+core-image-minimal      仅支持设备启动的小镜像 
+core-image-base         标设备硬件的只支持控制台的镜像 
+core-image-sato         镜像支持X11与Sato主题和使用Pimlico应用程序。它包含一个终端、一个编辑器和一个文件管理器。 
+fsl-image-machine-test  FSL 社区的核心镜像，支持控制台环境，没有GUI 界面 
+fsl-image-gui           一个支持 GUI 但没有 Qt5 的镜像 
+fsl-image-qt5           一个开源 Qt 5 的镜像
+
+DISTRO=<distro  name>  MACHINE=<machine  name>  source  fsl-setup-release.sh  -b  <build dir> 
+DISTRO：发行版类型 
+MACHINE：机器类型 
+-b:指定工程构建输出的目录
+DISTRO=fsl-imx-x11    MACHINE=imx6ull14x14evk source fsl-setup-release.sh -b build
+【构建 yocto 时不要加载任何工具链的环境变量（构建时会使用 yocto 项目的编译器进行编译），请创建新的 shell 或打开新的终端窗口。如果您在/etc/profile 下导出了与 gcc 相关的环境变量，请把它用“#”号注释后重启或者注销 Ubuntu 再执行上面的指令，因为/etc/profile 下的环境变量会开机就加载，并且在新的 shell 或者终端里始终生效！】
+配置过程中请你阅读 EULA 内容，输入 q 退出阅读内容后再按 y 确认已经阅读
+
+
+sudo apt-get install  gawk wget git-core  diffstat  unzip  texinfo  gcc-multilib build-essential chrpath socat libsdl1.2-dev curl
+bitbake fsl-image-qt5
+
+构建完成后进入../build/tmp/deploy/images/imx6ull14x14evk  目录下用 ls 指令查看生成的文件
+
+6、构建SDK工具
+在 build 目录下执行下面的指令（注：请在构建根文件系统后不要退出当前终端，否则还需
+要重新输入  DISTRO=fsl-imx-x11    MACHINE=imx6ull14x14evk  source  fsl-setup-release.sh  -b 
+build 来使用环境变量才能使用 bitbake 指令）
+bitbake meta-toolchain-qt5
+构建成功后，进入../build/tmp/deploy/sdk 目录，查看生成的文件。其中 fsl-imx-x11-glibc-x8
+6_64-meta-toolchain-qt5-cortexa7hf-neon-toolchain-4.1.15-2.1.0.sh 是我们需要的文件
+
+7、离线构建根文件系统
+https://pan.baidu.com/s/1vRrFTPRlpxhw56F02purNQ
+tar -Jvxf fsl-release-bsp.tar.xz
+其余同上
+
+
+
+
