@@ -1,0 +1,7 @@
+sudo apt-get install lzop
+tar -vxjf linux-imx-4.1.15-2.1.0-gb8ddbbc-v1.3.tar.bz2
+
+chmod a+x mx6ull_alientek_emmc_linux.sh
+./mx6ull_alientek_emmc_linux.sh
+编译完成以后就会在 arch/arm/boot 这个目录下生成一个叫做 zImage 的文件
+另外也会在 arch/arm/boot/dts 下生成很多.dtb 文件
