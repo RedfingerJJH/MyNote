@@ -1,0 +1,4 @@
+1、打开 /etc/sudoers
+sudoedit /etc/sudoers
+2、增加下面行
+<user-account-name> ALL=(ALL:ALL) NOPASSWD:ALL
