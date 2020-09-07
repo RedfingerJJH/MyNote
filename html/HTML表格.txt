@@ -1,0 +1,74 @@
+表格由 <table> 标签来定义。
+每个表格均有若干行（由 <tr> 标签定义），
+每行被分割为若干单元格（由 <td> 标签定义）。字母 td 指表格数据（table data），即数据单元格的内容。
+数据单元格可以包含文本、图片、列表、段落、表单、水平线、表格等等。
+
+1、没有边框的表格
+<table border="0">
+
+2、表格中的表头
+<th>姓名</th>
+
+3、表格中的空单元
+<td>&nbsp;</td>
+no-breaking 空格由和号开始 ("&")，然后是字符"nbsp"，并以分号结尾(";")
+
+4、带有标题的表格
+<caption>我的标题</caption>
+
+5、跨行或跨列的表格单元格
+<th colspan="2">电话</th>
+<th rowspan="2">电话</th>
+
+6、单元格边距(Cell padding)
+<table border="1" cellpadding="10">
+
+7、单元格间距(Cell spacing)
+<table border="1" cellspacing="10">
+
+8、表格背景颜色与图像
+<table border="1" bgcolor="red">
+<table border="1" background="/i/eg_bg_07.gif">
+
+9、单元格背景颜色与图像
+<td bgcolor="red">First</td>
+<td background="/i/eg_bg_07.gif">Second</td>
+
+10、在表格单元中排列内容
+<table width="400" border="1">
+<th align="left">消费项目....</th>
+<th align="right">一月</th>
+
+11、框架(frame)属性
+注释：frame 属性无法在 Internet Explorer 中正确地显示。
+<table frame="box">
+<table frame="above">
+<table frame="below">
+<table frame="hsides">
+<table frame="vsides">
+
+12、表格标签
+表格		描述
+<table>		定义表格
+<caption>	定义表格标题。
+<th>		定义表格的表头。
+<tr>		定义表格的行。
+<td>		定义表格单元。
+<thead>		定义表格的页眉。（封装第一行）
+<tbody>		定义表格的主体。（封装中间部分）
+<tfoot>		定义表格的页脚。（封装最后一行）
+<col>		定义用于表格列的属性。
+<colgroup>	定义表格列的组。
+
+thead 元素用于对 HTML 表格中的表头内容进行分组；
+tfoot 标签定义表格的页脚（脚注或表注）；
+tbody 元素用于对 HTML 表格中的主体内容进行分组。
+注释：如果您使用 thead、tfoot 以及 tbody 元素，您就必须使用全部的元素。
+它们的出现次序是：thead、tfoot、tbody。
+
+<col> 标签为表格中一个或多个列定义属性值。
+如需对全部列应用样式，<col> 标签很有用，这样就不需要对各个单元和各行重复应用样式了。
+
+<colgroup> 标签用于对表格中的列进行组合，以便对其进行格式化。
+<colgroup span="2" align="left"></colgroup>
+<colgroup align="right" style="color:#0000FF;"></colgroup>
