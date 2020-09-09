@@ -1,0 +1,107 @@
+通过使用框架，你可以在同一个浏览器窗口中显示不止一个页面。
+
+1、垂直框架
+<html>
+<frameset cols="25%,50%,25%">
+  <frame src="/example/html/frame_a.html">
+  <frame src="/example/html/frame_b.html">
+  <frame src="/example/html/frame_c.html">
+</frameset>
+</html>
+
+2、水平框架
+<html>
+<frameset rows="25%,50%,25%">
+  <frame src="/example/html/frame_a.html">
+  <frame src="/example/html/frame_b.html">
+  <frame src="/example/html/frame_c.html">
+</frameset>
+</html>
+
+通过使用框架，你可以在同一个浏览器窗口中显示不止一个页面。
+每份HTML文档称为一个框架，并且每个框架都独立于其他的框架。
+使用框架的坏处：
+开发人员必须同时跟踪更多的HTML文档
+很难打印整张页面
+
+框架结构标签（<frameset>）
+框架结构标签（<frameset>）定义如何将窗口分割为框架
+每个 frameset 定义了一系列行或列
+rows/columns 的值规定了每行或每列占据屏幕的面积
+
+框架标签（Frame）
+Frame 标签定义了放置在每个框架中的 HTML 文档。
+
+基本的注意事项 - 有用的提示：
+假如一个框架有可见边框，用户可以拖动边框来改变它的大小。
+为了避免这种情况发生，可以在 <frame> 标签中加入：noresize="noresize"。
+为不支持框架的浏览器添加 <noframes> 标签。
+
+重要提示：不能将 <body></body> 标签与 <frameset></frameset> 标签同时使用！
+不过，假如你添加包含一段文本的 <noframes> 标签，就必须将这段文字嵌套于 <body></body> 标签内。
+
+如何使用 <noframes> 标签
+<html>
+<frameset cols="25%,50%,25%">
+  <frame src="/example/html/frame_a.html">
+  <frame src="/example/html/frame_b.html">
+  <frame src="/example/html/frame_c.html">
+<noframes>
+<body>您的浏览器无法处理框架！</body>
+</noframes>
+</frameset>
+</html>
+
+混合框架结构
+<html>
+<frameset rows="50%,50%">
+<frame src="/example/html/frame_a.html">
+<frameset cols="25%,75%">
+<frame src="/example/html/frame_b.html">
+<frame src="/example/html/frame_c.html">
+</frameset>
+</frameset>
+</html>
+
+含有 noresize="noresize" 属性的框架结构
+<html>
+<frameset cols="50%,*,25%">
+  <frame src="/example/html/frame_a.html" noresize="noresize" />
+  <frame src="/example/html/frame_b.html" />
+  <frame src="/example/html/frame_c.html" />
+</frameset>
+</html>
+
+导航框架
+<html>
+<frameset cols="120,*">
+  <frame src="/example/html/html_contents.html">
+  <frame src="/example/html/frame_a.html" name="showframe">
+</frameset>
+</html>
+
+内联框架
+<html>
+<body>
+<iframe src="/i/eg_landscape.jpg"></iframe>
+<p>一些老的浏览器不支持 iframe。</p>
+<p>如果得不到支持，iframe 是不可见的。</p>
+</body>
+</html>
+
+跳转至框架内的一个指定的节
+<html>
+<frameset cols="20%,80%">
+ <frame src="/example/html/frame_a.html">
+ <frame src="/example/html/link.html#C10">
+</frameset>
+</html>
+
+使用框架导航跳转至指定的节
+<html>
+<frameset cols="180,*">
+<frame src="/example/html/content.html">
+<frame src="/example/html/link.html" name="showframe">
+</frameset>
+</html>
+

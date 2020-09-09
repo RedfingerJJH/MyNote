@@ -1,0 +1,25 @@
+对 HTML 进行分类（设置类），使我们能够为元素的类定义 CSS 样式。
+为相同的类设置相同的样式，或者为不同的类设置不同的样式。
+
+1、分类块级元素
+HTML <div> 元素是块级元素。它能够用作其他 HTML 元素的容器。
+设置 <div> 元素的类，使我们能够为相同的 <div> 元素设置相同的类：
+<head>
+<style>
+.cities {
+    background-color:black;
+    color:white;
+    margin:20px;
+    padding:20px;
+} 
+</style>
+</head>
+
+2、分类行内元素
+HTML <span> 元素是行内元素，能够用作文本的容器。
+设置 <span> 元素的类，能够为相同的 <span> 元素设置相同的样式。
+<head>
+<style>
+  span.red {color:red;}
+</style>
+</head>
