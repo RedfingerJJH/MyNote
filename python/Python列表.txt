@@ -1,0 +1,122 @@
+Python 集合（数组）
+Python 编程语言中有四种集合数据类型：
+	列表（List）是一种有序和可更改的集合。允许重复的成员。
+	元组（Tuple）是一种有序且不可更改的集合。允许重复的成员。
+	集合（Set）是一个无序和无索引的集合。没有重复的成员。
+	词典（Dictionary）是一个无序，可变和有索引的集合。没有重复的成员。
+选择集合类型时，了解该类型的属性很有用。
+为特定数据集选择正确的类型可能意味着保留含义，并且可能意味着提高效率或安全性。
+
+1、列表
+列表是一个有序且可更改的集合。在 Python 中，列表用方括号编写。
+thislist = ["apple", "banana", "cherry"]
+print(thislist)
+
+2、访问项目
+您可以通过引用索引号来访问列表项：
+print(thislist[0])
+
+3、负的索引
+负索引表示从末尾开始，-1 表示最后一个项目，-2 表示倒数第二个项目，依此类推。
+print(thislist[-1])
+
+4、索引范围
+您可以通过指定范围的起点和终点来指定索引范围。
+指定范围后，返回值将是包含指定项目的新列表。
+thislist = ["apple", "banana", "cherry", "orange", "kiwi", "melon", "mango"]
+print(thislist[2:5])
+注释：搜索将从索引 2（包括）开始，到索引 5（不包括）结束。
+请记住，第一项的索引为 0。
+如果要从列表末尾开始搜索，请指定负索引：
+print(thislist[-4:-1])
+
+5、更改项目值
+如需更改特定项目的值，请引用索引号：
+thislist = ["apple", "banana", "cherry"]
+thislist[1] = "mango"
+print(thislist)
+
+6、遍历列表
+您可以使用 for 循环遍历列表项：
+thislist = ["apple", "banana", "cherry"]
+for x in thislist:
+  print(x)
+
+7、检查项目是否存在
+如需确定列表中是否存在指定的项，请使用 in 关键字：
+thislist = ["apple", "banana", "cherry"]
+if "apple" in thislist:
+  print("Yes, 'apple' is in the fruits list")
+
+8、列表长度
+如需确定列表中有多少项，请使用 len() 方法：
+print(len(thislist))
+
+9、添加项目
+如需将项目添加到列表的末尾，请使用 append() 方法：
+thislist.append("orange")
+print(thislist))
+要在指定的索引处添加项目，请使用 insert() 方法：
+thislist.insert(1,"wiki")
+print(thislist)
+
+10、删除项目
+有几种方法可以从列表中删除项目：
+remove() 方法删除指定的项目：
+thislist.remove("banana")
+print(thislist)
+pop() 方法删除指定的索引（如果未指定索引，则删除最后一项）：
+thislist.pop()
+print(thislist)
+del 关键字也能完整地删除列表：
+del thislist
+clear() 方法清空列表：
+thislist.clear()
+print(thislist)
+
+11、复制列表
+您只能通过键入 list2 = list1 来复制列表，
+因为：list2 将只是对 list1 的引用，list1 中所做的更改也将自动在 list2 中进行。
+有一些方法可以进行复制，一种方法是使用内置的 List 方法 copy()。
+使用 copy() 方法来复制列表：
+thislist = ["apple", "banana", "cherry"]
+mylist = thislist.copy()
+print(mylist)
+制作副本的另一种方法是使用内建的方法 list()。
+mylist2 = list(thislist)
+print(mylist2)
+
+12、合并两个列表
+在 Python 中，有几种方法可以连接或串联两个或多个列表。
+最简单的方法之一是使用 + 运算符。
+list3 = mylist + mylist2
+print(list3)
+连接两个列表的另一种方法是将 list2 中的所有项一个接一个地追加到 list1 中：
+list1 = ["a", "b" , "c"]
+list2 = [1, 2, 3]
+for x in list2:
+  list1.append(x)
+print(list1)
+或者，您可以使用 extend() 方法，其目的是将一个列表中的元素添加到另一列表中：
+list3.extend(mylist2)
+print(list3)
+
+13、list() 构造函数
+也可以使用 list() 构造函数创建一个新列表。
+thislist = list(("apple", "banana", "cherry")) # 请注意双括号
+print(thislist)
+
+14、列表方法
+Python 有一组可以在列表上使用的内建方法。
+方法		描述
+append()	在列表的末尾添加一个元素
+clear()		删除列表中的所有元素
+copy()		返回列表的副本
+count()		返回具有指定值的元素数量。
+extend()	将列表元素（或任何可迭代的元素）添加到当前列表的末尾
+index()		返回具有指定值的第一个元素的索引
+insert()	在指定位置添加元素
+pop()		删除指定位置的元素
+remove()	删除具有指定值的项目
+reverse()	颠倒列表的顺序
+sort()		对列表进行排序

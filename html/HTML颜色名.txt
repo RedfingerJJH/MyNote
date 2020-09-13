@@ -1,0 +1,4 @@
+仅有 16 种颜色名被 W3C 的 HTML 4.0 标准支持，
+它们是：aqua、black、blue、fuchsia、gray、green、lime、maroon、navy、olive、
+purple、red、silver、teal、white、yellow。
+如果使用其它颜色的话，就应该使用十六进制的颜色值。

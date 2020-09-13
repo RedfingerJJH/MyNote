@@ -1,0 +1,18 @@
+1、Python 安装
+要检查是否已安装了 python，请运行以下命令：
+python --version
+如果您发现计算机上没有安装 python，则可以从以下网站免费下载：
+https://www.python.org/
+
+2、Python 快速入门
+Python 是一门解释型编程语言，您可以在文本编辑器中编写 Python（.py）文件，
+然后将这些文件放入 python 解释器中执行。在命令行上运行 python 文件的方式如下：
+python helloworld.py
+
+3、Python 命令行
+要在 python 中测试少量代码，在文件中写代码有时不是最快最简单的。
+把 Python 作为命令行来运行是可能的。
+在 Windows、Mac 或 Linux 命令行上键入以下内容：
+python
+无论何时，您都可以通过键入如下命令来退出 python 命令行界面：
+exit()
