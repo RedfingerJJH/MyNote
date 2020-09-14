@@ -1,0 +1,30 @@
+lambda 函数是一种小的匿名函数。
+lambda 函数可接受任意数量的参数，但只能有一个表达式。
+
+1、语法
+lambda arguments : expression
+执行表达式并返回结果：
+x = lambda a : a + 10
+print(x(5))
+
+x = lambda a, b : a * b
+print(x(5, 6))
+
+x = lambda a, b, c : a + b + c
+print(x(5, 6, 2))
+
+2、为何使用 Lambda 函数？
+当您把 lambda 用作另一个函数内的匿名函数时，会更好地展现 lambda 的强大能力。
+假设您有一个带一个参数的函数定义，并且该参数将乘以未知数字：
+def myfunc(n):
+  return lambda a : a * n
+  
+使用该函数定义来创建一个总是使所发送数字加倍的函数：
+mydoubler = myfunc(2) #即：mydoubler = lambda a : a * 2
+print(mydoubler(11))
+
+或者，使用相同的函数定义来创建一个总是使您发送的数字增加三倍的函数：
+mytripler = myfunc(3) #即：mydoubler = lambda a : a * 3
+print(mytripler(11))
+
+如果在短时间内需要匿名函数，请使用 lambda 函数。
